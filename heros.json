@@ -1,0 +1,31 @@
+{"Goku":{
+        "hero_name" : "Kakkarot",
+        "max_hp" : "3500",
+        "max_energy" : "1000",
+        "attack" : "169",
+        "energy_name" : "Ki",
+        "category" : "Powerhouse",
+        "anime" : "Dragon Ball",
+        "form" :{
+            "form_name" : "Ultra Instinct",
+            "energy_consumed" : "400",
+            "hp_mul" : "2.5",
+            "attack_mul" : "2.4"
+        }
+    },
+  "Naruto" : {
+        "hero_name" : "Naruto Uzumaki",
+        "max_hp" : "2500",
+        "max_energy" : "1000",
+        "attack" : "72",
+        "energy_name" : "Chakra",
+        "category" : "Powerhouse",
+        "anime" : "Naruto",
+        "form" :{
+            "form_name" : "Baryon Mode",
+            "energy_consumed" : "700",
+            "hp_mul" : "2.5",
+            "attack_mul" : "5.5"
+        }
+    }
+}
