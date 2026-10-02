@@ -32,12 +32,14 @@ class Character:
     def transform(self):
         if self.form == '0':
             print(f"{self.name.title()} have no form")
+        elif self.is_transformed:
+            print(" Already Transformed ")
         else:
-            if int(self.energy) - int(self.form["energy_consumed"]) > 0:
+            if  int(self.energy) >= int(self.form["energy_consumed"]):
                 print(f"\n{self.name} transformed into {self.form['form_name']}")
                 self.energy = int(self.energy) - int(self.form["energy_consumed"])
                 self.is_transformed = True
-                self.hp = int(self.hp) * float(self.form["hp_mul"])
+                self.hp = int(int(self.hp) * float(self.form["hp_mul"]))
             else:
                 print("Energy Below Level !! ")
 
@@ -66,37 +68,29 @@ class Character:
 class Goku(Character):
     #I made Ultra Instinct dodge attack by 0.5x
     def take_damage(self , amount):
-        if self.is_transformed == True:
-            self.hp = max(0, (int(self.hp) - amount*0.5) )
-            print(f"\n 🔻{self.form["form_name"]} Activated! Attack Suppressed!!")
+        if self.is_transformed:
+            new_attack = int(amount*0.5)
+            print(f"\n 🔻{self.form['form_name']} Activated! Attack Suppressed!!")
+            super().take_damage(new_attack)
         else:
-            self.hp = max(0, int(self.hp) - amount)
-
-        if int(self.hp)>100:
-            print(f"\n 🔻{self.name} left with {self.hp} HP!!")
-        elif int(self.hp)>0:
-            print(f"\n Critical Blowwwwww")
-            print(f"\n 🔻{self.name} left with {self.hp} HP!!")
-        elif int(self.hp) == 0:
-            print(f"\n 🔻{self.name} KNOCKED OUT!!!!!!!!!!!")
+            super().take_damage(amount)
 
 class Naruto(Character):
     def fight(self,target):
+        Baryon_Rasengan = 0
         if self.is_transformed :
             attack_multiplier = float(self.form["attack_mul"])
-            if int(self.energy) - 250>0:
+            if int(self.energy) >= 250:
                 Baryon_Rasengan = input("Do you wanna throw Baryon Rasengan [1 for yes] ? ")
-                self.energy = int(self.energy) - 250
         else:
             attack_multiplier = 1
-        if Baryon_Rasengan != '1':
-            damage_given = int(self.attack) * attack_multiplier
-            print(f"\n 💥{self.name} attacked {target.name} for {damage_given} damage")
-            target.take_damage(damage_given)
-        else:
+        if Baryon_Rasengan == '1':
             damage_given = 1350
+            self.energy = int(self.energy) - 250
             print(f"\n 💥💥💥{self.name} used BARYON RASENGAN ON  {target.name} 💥💥💥")
             target.take_damage(damage_given)
+        else:
+            super().fight(target)
 
 
 def show_characters():
