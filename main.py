@@ -27,7 +27,6 @@ class Character:
             print("\n")
         elif stats == 'hp':
             print(f"{f'\nHealth of {self.name}' : <21} : {self.hp}")
-            print("\n")
 
 
     def transform(self):
@@ -35,7 +34,8 @@ class Character:
             print(f"{self.name.title()} have no form")
         else:
             if int(self.energy) - int(self.form["energy_consumed"]) > 0:
-                print(f"{self.name} transformed into {self.form['form_name']}")
+                print(f"\n{self.name} transformed into {self.form['form_name']}")
+                self.energy = int(self.energy) - int(self.form["energy_consumed"])
                 self.is_transformed = True
                 self.hp = int(self.hp) * float(self.form["hp_mul"])
             else:
@@ -80,6 +80,24 @@ class Goku(Character):
         elif int(self.hp) == 0:
             print(f"\n 🔻{self.name} KNOCKED OUT!!!!!!!!!!!")
 
+class Naruto(Character):
+    def fight(self,target):
+        if self.is_transformed :
+            attack_multiplier = float(self.form["attack_mul"])
+            if int(self.energy) - 250>0:
+                Baryon_Rasengan = input("Do you wanna throw Baryon Rasengan [1 for yes] ? ")
+                self.energy = int(self.energy) - 250
+        else:
+            attack_multiplier = 1
+        if Baryon_Rasengan != '1':
+            damage_given = int(self.attack) * attack_multiplier
+            print(f"\n 💥{self.name} attacked {target.name} for {damage_given} damage")
+            target.take_damage(damage_given)
+        else:
+            damage_given = 1350
+            print(f"\n 💥💥💥{self.name} used BARYON RASENGAN ON  {target.name} 💥💥💥")
+            target.take_damage(damage_given)
+
 
 def show_characters():
     with open("heros.json") as h:
@@ -87,7 +105,7 @@ def show_characters():
     rosters = pd.DataFrame.from_dict(roster_list, orient="index")
     print(rosters["hero_name"])
 
-hero_registry = {"Goku" : Goku,"Vegeta" : Character,"Naruto":Character ,"Sasuke":Character,"Kakashi":Character,"Luffy":Character,"Zoro":Character,"Ichigo":Character}
+hero_registry = {"Goku" : Goku,"Vegeta" : Character,"Naruto":Naruto ,"Sasuke":Character,"Kakashi":Character,"Luffy":Character,"Zoro":Character,"Ichigo":Character}
 def load_player(hero_name)->Character:
     if hero_name in hero_registry:
             with open("heros.json") as h:
@@ -99,5 +117,11 @@ def load_player(hero_name)->Character:
 
 
 
+p1 = load_player("Naruto")
+p2 = load_player("Goku")
 
+p1.transform()
+p2.show_info("hp")
+p1.fight(p2)
+p2.show_info("hp")
 

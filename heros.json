@@ -23,7 +23,7 @@
         "anime" : "Naruto",
         "form" :{
             "form_name" : "Baryon Mode",
-            "energy_consumed" : "700",
+            "energy_consumed" : "400",
             "hp_mul" : "1.2",
             "attack_mul" : "5.5"
         }
@@ -60,7 +60,7 @@
   },
   "Kakashi": {
     "hero_name": "Kakashi Hatake",
-    "max_hp": "1800",
+    "max_hp": "2000",
     "max_energy": "650",
     "attack": "150",
     "energy_name": "Chakra",
