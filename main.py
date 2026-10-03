@@ -1,7 +1,6 @@
 import json
 from ensurepip import __main__
-from gc import set_debug
-from operator import index
+
 import random
 import pandas as pd
 
@@ -83,11 +82,8 @@ class Naruto(Character):
     def fight(self,target):
         Baryon_Rasengan = 0
         if self.is_transformed :
-            attack_multiplier = float(self.form["attack_mul"])
             if int(self.energy) >= 250:
                 Baryon_Rasengan = input("Do you wanna throw Baryon Rasengan [1 for yes] ? ")
-        else:
-            attack_multiplier = 1
         if Baryon_Rasengan == '1':
             damage_given = 1350
             self.energy = int(self.energy) - 250
@@ -103,35 +99,58 @@ def show_characters():
     print(rosters.index.tolist())
 
 hero_registry = {"Goku" : Goku,"Vegeta" : Character,"Naruto":Naruto ,"Sasuke":Character,"Kakashi":Character,"Luffy":Character,"Zoro":Character,"Ichigo":Character}
-def load_player(hero_name)->Character | None:
+def load_player(hero_name)->Character :
     if hero_name in hero_registry:
             with open("heros.json") as h:
                 roster_list = json.load(h)
             cls = hero_registry.get(hero_name, Character)
             return cls (roster_list[hero_name])
     else:
-        print(f"{hero_name} is not Availbale")
-        return None
+        print(f"{hero_name} is not Available")
+        raise  ValueError(f"\n\nCharacter {hero_name} does not exist")
+
+def turn(Player: Character , cpu : Character):
+    Player.fight(cpu)
+    if Player.form != '0':
+        if int(Player.energy) <= int(Player.form["energy_consumed"]):
+            Player.is_transformed = False
+    Player.energy = int(Player.energy) + 130
+
+
 
 if __name__ == "__main__":
     print(f" {'WELCOME TO ANIME RUSH \n':>50}")
     what_to_do = int(input("1. Start\n2. Show Rosters\n3. Exit : "))
     if what_to_do == 1:
-        player_choice = input("Choose Your Player [P1/P2]: ").upper()
         show_characters()
         char_choice = input(f"Choose a Character : ")
-        if player_choice == 'P1':
-               p1 = load_player(char_choice)
-               p2 = load_player(random.choice(['Goku', 'Naruto', 'Vegeta', 'Sasuke', 'Kakashi', 'Luffy', 'Zoro', 'Ichigo']))
-        elif player_choice == 'P2':
-               p2 = load_player(char_choice)
-               p1 = load_player(random.choice(['Goku', 'Naruto', 'Vegeta', 'Sasuke', 'Kakashi', 'Luffy', 'Zoro', 'Ichigo']))
-        else:
-            print("Wrong Selection")
+        Player1 = load_player(char_choice)
+        Player2 = load_player(random.choice(['Goku', 'Naruto', 'Vegeta', 'Sasuke', 'Kakashi', 'Luffy', 'Zoro', 'Ichigo']))
 
-        print("Player One : ",p1.name)
-        print("Player Two : ",p2.name)
+        print("Player One : ",Player1.name)
+        print("Player Two : ",Player2.name)
 
+        while Player2.hp!=0 and Player1.hp!=0:
+            print("\n")
+            choice = input("CHOOSE UR ACTION \n1.Attack \n2.Transform \n3.Check HP \n4.Surrender : ")
+            if choice == '1':
+                #Player 1
+                turn(Player1,Player2)
+                if Player2.hp <= 0: break
+                #Player 2
+                if int(Player2.energy) >= int(Player2.form["energy_consumed"]):
+                    Player2.transform()
+                turn(Player2,Player1)
+            elif choice == '2':
+                Player1.transform()
+                if int(Player2.energy) >= int(Player2.form["energy_consumed"]):
+                    Player2.transform()
+                turn(Player2,Player1)
+            elif choice == '3':
+                print("Current HP : ",Player1.hp)
+            elif choice == '4':
+                print(f'Player 1 surrendered !! ')
+                break
 
 
     elif what_to_do == 2:

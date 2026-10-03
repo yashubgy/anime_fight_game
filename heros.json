@@ -23,7 +23,7 @@
         "anime" : "Naruto",
         "form" :{
             "form_name" : "Baryon Mode",
-            "energy_consumed" : "400",
+            "energy_consumed" : "600",
             "hp_mul" : "1.2",
             "attack_mul" : "5.5"
         }
