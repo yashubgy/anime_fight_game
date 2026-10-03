@@ -1,4 +1,8 @@
 import json
+from ensurepip import __main__
+from gc import set_debug
+from operator import index
+import random
 import pandas as pd
 
 class Character:
@@ -87,20 +91,19 @@ class Naruto(Character):
         if Baryon_Rasengan == '1':
             damage_given = 1350
             self.energy = int(self.energy) - 250
-            print(f"\n 💥💥💥{self.name} used BARYON RASENGAN ON  {target.name} 💥💥💥")
+            print(f"\n 💥💥💥{self.name} used BARYON Rasengan ON  {target.name} 💥💥💥")
             target.take_damage(damage_given)
         else:
             super().fight(target)
 
-
 def show_characters():
     with open("heros.json") as h:
         roster_list = json.load(h)
-    rosters = pd.DataFrame.from_dict(roster_list, orient="index")
-    print(rosters["hero_name"])
+    rosters = pd.DataFrame.from_dict(roster_list,orient="index" )
+    print(rosters.index.tolist())
 
 hero_registry = {"Goku" : Goku,"Vegeta" : Character,"Naruto":Naruto ,"Sasuke":Character,"Kakashi":Character,"Luffy":Character,"Zoro":Character,"Ichigo":Character}
-def load_player(hero_name)->Character:
+def load_player(hero_name)->Character | None:
     if hero_name in hero_registry:
             with open("heros.json") as h:
                 roster_list = json.load(h)
@@ -108,14 +111,31 @@ def load_player(hero_name)->Character:
             return cls (roster_list[hero_name])
     else:
         print(f"{hero_name} is not Availbale")
+        return None
+
+if __name__ == "__main__":
+    print(f" {'WELCOME TO ANIME RUSH \n':>50}")
+    what_to_do = int(input("1. Start\n2. Show Rosters\n3. Exit : "))
+    if what_to_do == 1:
+        player_choice = input("Choose Your Player [P1/P2]: ").upper()
+        show_characters()
+        char_choice = input(f"Choose a Character : ")
+        if player_choice == 'P1':
+               p1 = load_player(char_choice)
+               p2 = load_player(random.choice(['Goku', 'Naruto', 'Vegeta', 'Sasuke', 'Kakashi', 'Luffy', 'Zoro', 'Ichigo']))
+        elif player_choice == 'P2':
+               p2 = load_player(char_choice)
+               p1 = load_player(random.choice(['Goku', 'Naruto', 'Vegeta', 'Sasuke', 'Kakashi', 'Luffy', 'Zoro', 'Ichigo']))
+        else:
+            print("Wrong Selection")
+
+        print("Player One : ",p1.name)
+        print("Player Two : ",p2.name)
 
 
 
-p1 = load_player("Naruto")
-p2 = load_player("Goku")
-
-p1.transform()
-p2.show_info("hp")
-p1.fight(p2)
-p2.show_info("hp")
-
+    elif what_to_do == 2:
+        print("\nAvailable Rosters : ")
+        show_characters()
+    elif what_to_do == 3:
+        print("Come Back Again !!! ")
