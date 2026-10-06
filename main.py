@@ -46,6 +46,7 @@ class Character:
         else:
             print("\nEnergy Below Level !! ")
 
+
     def fight(self,target):
         if self.is_transformed :
             attack_multiplier = float(self.form["attack_mul"])
@@ -67,7 +68,6 @@ class Character:
 
     def end_turn(self):
         pass
-
         
 class Goku(Character):
     #I made Ultra Instinct dodge attack by 0.5x
@@ -92,6 +92,7 @@ class Luffy(Character):
         else:
             super().take_damage(amount)
             
+
 class Naruto(Character):
     def fight(self,target):
         Baryon_Rasengan = 0
