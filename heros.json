@@ -1,0 +1,121 @@
+{"Goku":{
+        "hero_name" : "Kakkarot",
+        "max_hp" : "3500",
+        "max_energy" : "1000",
+        "attack" : "280",
+        "energy_name" : "Ki",
+        "category" : "Powerhouse",
+        "anime" : "Dragon Ball",
+        "form" :{
+            "form_name" : "Ultra Instinct",
+            "energy_consumed" : "400",
+            "hp_mul" : "1.5",
+            "attack_mul" : "2.4"
+        }
+    },
+  "Naruto" : {
+        "hero_name" : "Naruto Uzumaki",
+        "max_hp" : "2500",
+        "max_energy" : "1000",
+        "attack" : "180",
+        "energy_name" : "Chakra",
+        "category" : "Powerhouse",
+        "anime" : "Naruto",
+        "form" :{
+            "form_name" : "Baryon Mode",
+            "energy_consumed" : "600",
+            "hp_mul" : "1.2",
+            "attack_mul" : "5.5"
+        }
+    },
+  "Vegeta": {
+    "hero_name": "Prince Vegeta",
+    "max_hp": "3400",
+    "max_energy": "950",
+    "attack": "270",
+    "energy_name": "Ki",
+    "category": "Powerhouse",
+    "anime": "Dragon Ball",
+    "form": {
+      "form_name": "Ultra Ego",
+      "energy_consumed": "450",
+      "hp_mul": "1.2",
+      "attack_mul": "2.6"
+    }
+  },
+  "Sasuke": {
+    "hero_name": "Sasuke Uchiha",
+    "max_hp": "2300",
+    "max_energy": "900",
+    "attack": "172",
+    "energy_name": "Chakra",
+    "category": "Tactician",
+    "anime": "Naruto",
+    "form": {
+      "form_name": "Complete Body Susanoo",
+      "energy_consumed": "650",
+      "hp_mul": "2.5",
+      "attack_mul": "4.8"
+    }
+  },
+  "Kakashi": {
+    "hero_name": "Kakashi Hatake",
+    "max_hp": "2000",
+    "max_energy": "650",
+    "attack": "150",
+    "energy_name": "Chakra",
+    "category": "Tactician",
+    "anime": "Naruto",
+    "form": {
+      "form_name": "DMS Susanoo",
+      "energy_consumed": "500",
+      "hp_mul": "2.8",
+      "attack_mul": "4.2"
+    }
+  },
+  "Luffy": {
+    "hero_name": "Monkey D. Luffy",
+    "max_hp": "2800",
+    "max_energy": "1000",
+    "attack": "140",
+    "energy_name": "Haki",
+    "category": "Brawler",
+    "anime": "One Piece",
+    "form": {
+      "form_name": "Gear 5",
+      "energy_consumed": "400",
+      "hp_mul": "1.2",
+      "attack_mul": "3.8"
+    }
+  },
+  "Zoro": {
+    "hero_name": "Roronoa Zoro",
+    "max_hp": "2600",
+    "max_energy": "750",
+    "attack": "160",
+    "energy_name": "Haki",
+    "category": "Brawler",
+    "anime": "One Piece",
+    "form": {
+      "form_name": "King of Hell",
+      "energy_consumed": "500",
+      "hp_mul": "1.4",
+      "attack_mul": "2.6"
+    }
+  },
+  "Ichigo": {
+    "hero_name": "Ichigo Kurosaki",
+    "max_hp": "2700",
+    "max_energy": "850",
+    "attack": "180",
+    "energy_name": "Reiryoku",
+    "category": "Powerhouse",
+    "anime": "Bleach",
+    "form": {
+      "form_name": "Horn of Salvation",
+      "energy_consumed": "600",
+      "hp_mul": "1.6",
+      "attack_mul": "2.4"
+    }
+  }
+}
